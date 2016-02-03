@@ -31,10 +31,14 @@ data_subset   <- data[data$Date_num >= as.Date("2007-02-01") & data$Date_num <= 
 data_subset$DateTime <- as.POSIXct(paste(data_subset$Date, data_subset$Time, sep=" "),
                                    format="%d/%m/%Y %H:%M:%S")
 
-# Plot of {Global Active Power, Voltage, Energy Sub Metering, Global Reactive Power} over Time
+# Plot of 4 graphs in one 2x2 grid
+# {Global Active Power, Voltage, Energy Sub Metering, Global Reactive Power} over Time
 
 png(file="plot4.png", width=480, height=480)
 par(mfrow=c(2,2))
+
+# Plot 1: {Global Active Power} over Time
+
 plot(data_subset$DateTime,
      data_subset$Global_active_power,
      type="l",
@@ -42,6 +46,9 @@ plot(data_subset$DateTime,
      xlab="",
      ylab="Global Active Power",
      main="")
+
+# Plot 2: {Voltage} over Time
+
 plot(data_subset$DateTime,
      data_subset$Voltage,
      type="l",
@@ -49,6 +56,9 @@ plot(data_subset$DateTime,
      xlab="datetime",
      ylab="Voltage",
      main="")
+
+# Plot 3: {Energy Sub Metering} over Time
+
 plot(data_subset$DateTime,
      data_subset$Sub_metering_1,
      type="l",
@@ -67,6 +77,9 @@ legend("topright",
        col=c("black", "red", "blue"),
        lty=1,
        lwd=1)
+
+# Plot 4: {Global Reactive Power} over Time
+
 plot(data_subset$DateTime,
      data_subset$Global_reactive_power,
      type="l",
